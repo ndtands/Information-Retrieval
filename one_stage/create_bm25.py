@@ -4,11 +4,11 @@ from gensim.corpora import Dictionary
 from gensim.models import TfidfModel, OkapiBM25Model
 from utils import post_process
 from gensim.similarities import SparseMatrixSimilarity
-from config import BM25_PATH, PATH_WIKI
+from config import BM25_PATH, WIKI_PATH
 pandarallel.initialize(progress_bar=True, use_memory_fs=False, nb_workers=10)
 
 # Load data wiki
-df_wiki = pd.read_csv(PATH_WIKI)
+df_wiki = pd.read_csv(WIKI_PATH)
 df_wiki = df_wiki.fillna("NaN")
 
 # Get corpus
