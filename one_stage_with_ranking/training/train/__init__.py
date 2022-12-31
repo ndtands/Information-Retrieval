@@ -113,6 +113,7 @@ def test_step(
         all_preds = np.array(all_preds)
         targets = np.array(targets)
         f1 = f1_score(targets, all_preds > 0.5)
+    total_loss = total_loss.cpu()
     return (f1, total_loss/len(valid_loader))
 
 def Trainer() -> Dict:
@@ -127,6 +128,8 @@ def Trainer() -> Dict:
     best_loss =  1e10
     history = dict()
     for fold, (train_index, test_index) in enumerate(kfold.split(df_data, df_data.label)):
+        if fold >= 2:
+            break
         print("="*100)
         history[fold] = {
             'f1_score': [],
@@ -169,4 +172,6 @@ def Trainer() -> Dict:
                 torch.save(model.state_dict(), PATH_WEIGHTED_LOSS)
             history[fold]['f1_score'].append(f1_test)
             history[fold]['loss'].append(loss_test)
+    history['best_f1'] = best_f1
+    history['best_loss'] = best_loss
     return  history          

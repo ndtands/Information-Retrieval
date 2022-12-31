@@ -1,11 +1,11 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 MODEL_NAME = 'nguyenvulebinh/vi-mrc-base'
 HYPERPARAMETER = {
     "accumulation_steps": 8,
-    "batch_size": 4,
+    "batch_size": 16,
     "n_workers": 4,
     "max_length": 384,
     "epochs": 5,
